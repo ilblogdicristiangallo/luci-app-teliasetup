@@ -81,6 +81,7 @@ The app detects the currently installed version on the modem and applies only th
 ## 🔧 Requirements
 
 - **OpenWrt 25** (Compatbility on `ZTE MF286D`)
+- **OpenWrt 24** (Compatbility on `ZTE MF286D`)
 - **ZTE MF286D modem** with USB serial active
 - **Free RAM**: at least 80 MB in `/tmp/`
 - **Free flash**: at least 10 MB in `/overlay/`
@@ -98,4 +99,3 @@ The app detects the currently installed version on the modem and applies only th
 
 <pre>apk add --allow-untrusted /tmp/luci-app-teliasetup-1.0.0-r1.apk</pre>
 
-# Work in progress for OpenWRT 24.
