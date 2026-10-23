@@ -78,10 +78,37 @@ The app detects the currently installed version on the modem and applies only th
 
 ---
 
+## ⏱️ Timing
+
+Each update package goes through two phases, each with its own countdown:
+
+| Phase | Countdown |
+|-------|-----------|
+| Flash in progress | 6 min 10 s (370 s) |
+| Waiting for new FOTA | 15 s |
+| **Total countdown per package** | **6 min 25 s (385 s)** |
+
+On top of the countdowns there are about 70 s of fixed pauses (5 s after every ADB upload and every AT command) and about 10 s for the version check, so one package takes roughly **7 min 45 s**, plus the ADB transfer time.
+
+The full path from B02/B03/B04 installs **7 packages** (B05, B06, B08, B09, B10, B11, B12), for a total countdown of **44 min 55 s** and about **54 min** overall. Version B07 has no dedicated package: from B06 or B07 the next step is B08.
+
+| Starting version | Packages to install | Total countdown |
+|------------------|---------------------|-----------------|
+| B02 / B03 / B04 | 7 (B05 → B12) | 44 min 55 s |
+| B05 | 6 (B06 → B12) | 38 min 30 s |
+| B06 / B07 | 5 (B08 → B12) | 32 min 5 s |
+| B08 | 4 (B09 → B12) | 25 min 40 s |
+| B09 | 3 (B10 → B12) | 19 min 15 s |
+| B10 | 2 (B11 → B12) | 12 min 50 s |
+| B11 | 1 (B12) | 6 min 25 s |
+| B12 | 0 (already up to date) | none |
+
+---
+
 ## 🔧 Requirements
 
-- **OpenWrt 25** (Compatbility on `ZTE MF286D`)
-- **OpenWrt 24** (Compatbility on `ZTE MF286D`)
+- **OpenWrt 25** (Compatibility on `ZTE MF286D`)
+- **OpenWrt 24** (Compatibility on `ZTE MF286D`)
 - **ZTE MF286D modem** with USB serial active
 - **Free RAM**: at least 80 MB in `/tmp/`
 - **Free flash**: at least 10 MB in `/overlay/`
@@ -98,4 +125,3 @@ The app detects the currently installed version on the modem and applies only th
 3. Install:
 
 <pre>apk add --allow-untrusted /tmp/luci-app-teliasetup-1.0.0-r1.apk</pre>
-
